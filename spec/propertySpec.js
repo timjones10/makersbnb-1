@@ -11,7 +11,6 @@ describe("Property", function() {
         var description = "Two up, two down, thatched";
         var price = 100;
         property = new Property(title, description, price);
-        console.log(property)
     });
 
     it("has the property 'title'", function() {
