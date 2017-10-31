@@ -1,8 +1,8 @@
 describe("Property", function() {
 
-    var Property = require('../lib/property.js');
+    // var Property = require('../lib/property.js');
 
-    console.log(Property)
+    // console.log(Property)
 
     var property;
 
