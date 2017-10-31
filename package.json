@@ -1,0 +1,29 @@
+{
+  "name": "makersbnb",
+  "version": "1.0.0",
+  "description": "Week 6 Project Makers B&B",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andyrow123/makersbnb.git"
+  },
+  "author": "Team Sleeve",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andyrow123/makersbnb/issues"
+  },
+  "homepage": "https://github.com/andyrow123/makersbnb#readme",
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "^4.15.5",
+    "jasmine": "^2.8.0",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  }
+}
