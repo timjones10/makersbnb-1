@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 
 var spaceSchema = new mongoose.Schema({
-    title       : { type: String, required: true },
-    description : { type: String, required: true, trim: true},
-    price       : { type: Number, required: true}
+    title       : { type: String},
+    description : { type: String},
+    price       : { type: Number}
 });
 
 var Space = mongoose.model('Space', spaceSchema);

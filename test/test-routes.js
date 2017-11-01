@@ -17,4 +17,14 @@ describe('Spaces', function(){
       done();
   }); // end
 }); // it
+
+it('should show a title field', function(){
+  chai.request(app)
+  .post('/spaces')
+  .send({title: 'cottage', description: 'large', price: 8 })
+  .end(function(err, res){
+  //  console.log(res.body)
+    expect(res.body).to.include('cottage');
+  });
+});
 }); //describe
