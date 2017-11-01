@@ -10,8 +10,7 @@ var assert = require('assert');
 var http = require('http');
 // chai.use(chaiHttp);
 
-
-describe('Spaces', function() {
+describe('Spaces', function(){
 
   before(function() {
     this.server = http.createServer(app).listen(3000);
@@ -24,15 +23,38 @@ describe('Spaces', function() {
     this.browser.visit('/spaces', done);
   });
 
-  it('should display spaces page', function() {
-    assert.ok(this.browser.success);
+  describe('Get', function() {
 
-    // assert.equal(this.browser.text('h1'), 'Contact');
-    // assert.equal(this.browser.text('form label'), 'First NameLast NameEmailMessage');
+    it('should display spaces page', function() {
+      assert.ok(this.browser.success);
+    });
+
+    it('testing the form ', function() {
+      this.browser.assert.input('form input[placeholder=title]', '');
+    });
+
   });
 
+  describe('Post', function() {
 
-});
+    // load the contact page
+    before(function(done) {
+      this.browser.fill('input[name=title]', 'Test Title Zombie');
+      this.browser.fill('input[name=description]', 'Zombie');
+      this.browser.fill('input[name=price]', 20);
+      this.browser.pressButton('Submit', done);
+    });
+
+    it('posting the form', function() {
+      console.log(this.browser.text('ul'))
+
+      assert(this.browser.text('li'), 'Test Title Zombie');
+    });
+
+  });
+
+})
+
 
 
 
