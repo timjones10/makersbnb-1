@@ -11,6 +11,7 @@ var express = require('express'),
     index = require('./routes/index'),
     users = require('./routes/users'),
     spaces = require('./routes/spaces');
+var http = require('http');
 
 
 var app = express();
@@ -52,6 +53,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
-})
+// app.listen(3000, function () {
+//     console.log('Example app listening on port 3000!')
+// })
