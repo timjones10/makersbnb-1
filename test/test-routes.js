@@ -29,15 +29,18 @@ describe('Spaces', function(){
       assert.ok(this.browser.success);
     });
 
-    it('testing the form ', function() {
-      this.browser.assert.input('form input[placeholder=title]', '');
-    });
+  });
 
+  describe('Post', function() {
+//this is left over from a test which was removed
   });
 
   describe('Post', function() {
 
-    // load the contact page
+    before(function(done) {
+      this.browser.visit('/spaces/addspace', done);
+    });
+
     before(function(done) {
       this.browser.fill('input[name=title]', 'Test Title Zombie');
       this.browser.fill('input[name=description]', 'Zombie');
@@ -50,9 +53,7 @@ describe('Spaces', function(){
 
       assert(this.browser.text('li'), 'Test Title Zombie');
     });
-
   });
-
 })
 
 

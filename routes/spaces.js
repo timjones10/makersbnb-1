@@ -13,6 +13,10 @@ router.get('/', function(req, res){
     })
 });
 
+router.get('/addspace', function(req, res){
+        res.render('spaces/addspace');
+});
+
 router.post('/', function(req, res){
     var title = req.body.title;
     var description = req.body.description;
