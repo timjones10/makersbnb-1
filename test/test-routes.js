@@ -45,12 +45,27 @@ describe('Spaces', function(){
     });
 
     it('posting the form', function() {
-      console.log(this.browser.text('ul'))
+      console.log(this.browser.text('ul'));
 
       assert(this.browser.text('li'), 'Test Title Zombie');
     });
   });
-})
+
+  describe('Home page', function() {
+
+    before(function(done) {
+      this.browser.visit('/', done);
+    });
+
+    it('should display the index page', function() {
+      assert.ok(this.browser.success);
+    });
+
+    it('has a button to direct to spaces', function(){
+      assert(this.browser.text('form'), 'View Spaces');
+    });
+  });
+});
 
 
 
