@@ -1,5 +1,6 @@
 var express = require('express');
 var Space = require('../models/space');
+var Searchdate = require('../models/searchdate');
 var router = express.Router();
 
 /*
@@ -10,8 +11,18 @@ router.get('/', function(req, res){
     Space.find({}, function(err, spaces){
         if(err) return console.log(err);
         res.render('spaces/index', { spaces: spaces });
-    })
+    });
 });
+
+router.post('/', function(req, res){
+    var startdate = req.body.startdate;
+    var enddate = req.body.enddate;
+    Searchdate.create({ startdate: startdate, enddate: enddate,
+    }, function(err, searchdate){
+            if(err) return console.log(err);
+            res.redirect('/spaces');
+      });
+    });
 
 router.get('/addspace', function(req, res){
         res.render('spaces/addspace');
@@ -28,6 +39,10 @@ router.post('/', function(req, res){
             res.redirect('/spaces');
     });
 });
+
+
+
+
 
 //export all the functions
 module.exports = router;
