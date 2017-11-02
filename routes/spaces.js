@@ -15,20 +15,6 @@ router.get('/', function(req, res){
 });
 
 router.post('/', function(req, res){
-    var startdate = req.body.startdate;
-    var enddate = req.body.enddate;
-    Searchdate.create({ startdate: startdate, enddate: enddate,
-    }, function(err, searchdate){
-            if(err) return console.log(err);
-            res.redirect('/spaces');
-      });
-    });
-
-router.get('/addspace', function(req, res){
-        res.render('spaces/addspace');
-});
-
-router.post('/', function(req, res){
     var title = req.body.title;
     var description = req.body.description;
     var price = req.body.price;
@@ -40,8 +26,19 @@ router.post('/', function(req, res){
     });
 });
 
+router.get('/addspace', function(req, res){
+        res.render('spaces/addspace');
+});
 
-
+router.post('/', function(req, res){
+    var startdate = req.body.startdate;
+    var enddate = req.body.enddate;
+    Searchdate.create({ startdate: startdate, enddate: enddate,
+    }, function(err, searchdate){
+            if(err) return console.log(err);
+            res.redirect('/spaces');
+      });
+    });
 
 
 //export all the functions
