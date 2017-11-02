@@ -1,5 +1,9 @@
 <ul>
     <% spaces.forEach(function(space) { %>
-        <li><%= space.title %> </li>
+
+        <li><%= space.title %> : <%= space.description %> available for <%= space.price %>
+          <form action="/bookings/new">
+          <input type="submit"  value="Book" ></li>
+         </form>
     <% }); %>
 </ul>

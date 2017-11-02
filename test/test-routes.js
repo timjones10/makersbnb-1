@@ -63,7 +63,6 @@ describe('Spaces', function(){
 
     it('has a button to direct to spaces', function(){
       assert(this.browser.text('form'), 'View Spaces');
-      assert(this.browser.text('form'), 'Add a Space');
     });
     it('has a button to direct to add a space', function(){
       assert(this.browser.text('form'), 'Add A Space');
