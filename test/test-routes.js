@@ -1,14 +1,10 @@
-// var chai = require('chai');
-// var chaiHttp = require('chai-http');
 var app = require('../app.js');
-// var should = chai.should();
-// var expect = require('chai').expect ;
 var morgan = require('morgan');
 bodyParser = require('body-parser');
 var Browser = require('zombie');
 var assert = require('assert');
 var http = require('http');
-// chai.use(chaiHttp);
+
 
 describe('Spaces', function(){
 

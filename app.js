@@ -10,8 +10,8 @@ var express = require('express'),
 
     index = require('./routes/index'),
     users = require('./routes/users'),
-    spaces = require('./routes/spaces');
-var http = require('http');
+    spaces = require('./routes/spaces'),
+    http = require('http');
 
 
 var app = express();
@@ -27,7 +27,6 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(app.routes);
 
 app.use('/', index);
 app.use('/spaces', spaces);
@@ -53,6 +52,9 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-// app.listen(3000, function () {
-//     console.log('Example app listening on port 3000!')
-// })
+if(!module.parent){
+    app.listen(3000, function () {
+        console.log('Example app listening on port 3000!')
+    })
+}
+

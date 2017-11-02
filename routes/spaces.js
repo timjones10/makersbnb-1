@@ -21,8 +21,7 @@ router.post('/', function(req, res){
     var title = req.body.title;
     var description = req.body.description;
     var price = req.body.price;
-    Space.create({ title: title,
-                    description: description,
+    Space.create({ title: title, description: description,
                    price: price
         }, function(err, space){
             if(err) return console.log(err);

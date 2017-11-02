@@ -1,4 +1,4 @@
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-var uri = 'mongodb://localhost:27017/makersbnb';
-mongoose.connect(uri, {useMongoClient: true });
+var config = require('config');
+
+mongoose.connect(config.get('MONGO_URL'), {useMongoClient: true });
