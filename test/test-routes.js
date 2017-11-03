@@ -44,7 +44,7 @@ describe('Spaces', function() {
     });
 
     it('posting the form', function() {
-      console.log(this.browser.text('ul'))
+      console.log(this.browser.text('ul'));
 
       assert(this.browser.text('li'), 'Test Title Zombie');
     });

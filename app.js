@@ -20,6 +20,7 @@ var passport = require("passport"),
   LocalStrategy = require("passport-local"),
   passportLocalMongoose = require("passport-local-mongoose");
 
+
 var app = express();
 var mongoose = require("mongoose");
 // mongoose.connect("mongodb://localhost/auth_demo_app", {
@@ -53,6 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/spaces', spaces);
+app.use('/bookings', bookings);
 app.use('/users', users);
 app.use('/secret', home);
 app.use('/auth', auth);
