@@ -18,6 +18,8 @@ var router = express.Router();
   app.use(passport.initialize());
   app.use(passport.session());
 
+  passport.use(new LocalStrategy(User.authenticate()));
+
   passport.serializeUser(User.serializeUser());
   passport.deserializeUser(User.deserializeUser());
 
@@ -35,10 +37,10 @@ router.post('/', function (req, res) {
       console.log(err);
       return res.render('register');
     }
-    debugger
-    passport.authenticate("local")(req,res,function(){
-      res.redirect("/secret");
-    });
+
+     passport.authenticate("local")(req,res,function(){
+       res.redirect("/secret");
+     });
   });
 });
 

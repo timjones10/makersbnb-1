@@ -14,7 +14,7 @@ var express = require('express'),
   spaces = require('./routes/spaces'),
   home = require('./routes/home'),
   register = require('./routes/register'),
-
+  login = require('./routes/login')
   http = require('http');
 
 var passport = require("passport"),
@@ -34,6 +34,8 @@ app.use(require("express-session")({
   saveUninitialized: false
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // view engine setup
@@ -55,6 +57,7 @@ app.use('/spaces', spaces);
 app.use('/users', users);
 app.use('/secret', home);
 app.use('/register', register);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
