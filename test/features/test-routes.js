@@ -2,47 +2,60 @@
 var Browser = require('zombie');
 var assert = require('assert');
 
-describe('Spaces', function(){
+describe('Spaces', function () {
 
-  before(function(done) {
-    this.browser = new Browser({ site: 'http://localhost:3000' });
-    this.browser.visit('/spaces', done);
-  });
-
-  describe('Get', function() {
-
-    it('should display spaces page', function() {
-      assert.ok(this.browser.success);
+    before(function (done) {
+        this.browser = new Browser({site: 'http://localhost:3000'});
+        this.browser.visit('/spaces', done);
     });
 
-  });
+    describe('Get', function () {
 
-  describe('Post', function() {
+        it('should display spaces page', function () {
+            assert.ok(this.browser.success);
+        });
+
+    });
+
+    describe('Post', function () {
 //this is left over from a test which was removed
-  });
-
-  describe('Post', function() {
-
-    before(function(done) {
-      this.browser.visit('/spaces/addspace', done);
     });
 
-    before(function(done) {
-      this.browser.fill('input[name=title]', 'Test Title Zombie');
-      this.browser.fill('input[name=description]', 'Zombie');
-      this.browser.fill('input[name=price]', 20);
-      this.browser.pressButton('Submit', done);
+    describe('Post', function () {
+
+        before(function (done) {
+            this.browser.visit('/spaces/addspace', done);
+        });
+
+        before(function (done) {
+            this.browser.fill('input[name=title]', 'Test Title Zombie');
+            this.browser.fill('input[name=description]', 'Zombie');
+            this.browser.fill('input[name=price]', 20);
+            this.browser.pressButton('Submit', done);
+        });
+
+        it('posting the form', function () {
+            console.log(this.browser.text('ul'))
+
+            assert(this.browser.text('li'), 'Test Title Zombie');
+        });
     });
 
-    it('posting the form', function() {
-      console.log(this.browser.text('ul'))
+    describe('Home page', function () {
 
-      assert(this.browser.text('li'), 'Test Title Zombie');
+        before(function (done) {
+            this.browser.visit('/', done);
+        });
+
+        it('should display the index page', function () {
+            assert.ok(this.browser.success);
+        });
+
+        it('has a button to Sign up here !', function () {
+            assert(this.browser.text('a'), 'Sign up here !');
+        });
     });
-  });
-})
-
-
+});
 
 
 //
