@@ -1,20 +1,45 @@
 var express = require('express'),
-    path = require('path'),
-    favicon = require('serve-favicon'),
-    logger = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser'),
+  path = require('path'),
+  favicon = require('serve-favicon'),
+  logger = require('morgan'),
+  cookieParser = require('cookie-parser'),
+  bodyParser = require('body-parser'),
 
-    db = require('./models/db'),
-    space = require('./models/space'),
+  db = require('./models/db'),
+  space = require('./models/space'),
+  User = require("./models/users"),
 
-    index = require('./routes/index'),
-    users = require('./routes/users'),
-    spaces = require('./routes/spaces'),
-    http = require('http');
+  index = require('./routes/index'),
+  users = require('./routes/users'),
+  spaces = require('./routes/spaces'),
+  home = require('./routes/home'),
+  register = require('./routes/register'),
 
+  http = require('http');
+
+var passport = require("passport"),
+  LocalStrategy = require("passport-local"),
+  passportLocalMongoose = require("passport-local-mongoose")
 
 var app = express();
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/auth_demo_app", {
+  useMongoClient: true
+});
+  mongoose.Promise = global.Promise;
+
+app.use(require("express-session")({
+  secret: "one two three four",
+  resave: false,
+  saveUninitialized: false
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,13 +49,17 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 // app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/spaces', spaces);
 app.use('/users', users);
+app.use('/secret', home);
+app.use('/register', register);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,9 +81,10 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-if(!module.parent){
-    app.listen(3000, function () {
-        console.log('Example app listening on port 3000!')
-    })
-}
 
+
+if (!module.parent) {
+  app.listen(3000, function() {
+    console.log('Example app listening on port 3000!')
+  })
+}
