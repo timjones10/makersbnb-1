@@ -19,7 +19,7 @@ var express = require('express'),
 
 var passport = require("passport"),
   LocalStrategy = require("passport-local"),
-  passportLocalMongoose = require("passport-local-mongoose")
+  passportLocalMongoose = require("passport-local-mongoose");
 
 var app = express();
 var mongoose = require("mongoose");
@@ -35,11 +35,6 @@ app.use(require("express-session")({
 }));
 
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
