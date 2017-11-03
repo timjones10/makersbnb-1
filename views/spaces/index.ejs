@@ -1,5 +1,11 @@
 <ul>
     <% spaces.forEach(function(space) { %>
-        <li><%= space.title %> </li>
+        <li>
+            <%= space.title %> <a href="bookings?spaceId=<%= space._id %>" value="Book">Book</a>
+            <%  space.bookings.forEach(function(booking) { %>
+                <div> <%= booking.date %></div>
+            <% }); %>
+        </li>
+
     <% }); %>
 </ul>

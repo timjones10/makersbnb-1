@@ -5,13 +5,17 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
 
-    db = require('./models/db'),
+    db = require('./config/db'),
     space = require('./models/space'),
 
     index = require('./routes/index'),
     users = require('./routes/users'),
     spaces = require('./routes/spaces'),
+    bookings = require('./routes/bookings'),
     http = require('http');
+var mongoose = require('mongoose');
+
+mongoose.Promise = require('bluebird');
 
 
 var app = express();
@@ -30,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/spaces', spaces);
+app.use('/bookings', bookings);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
