@@ -5,7 +5,7 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
 
-  db = require('./models/db'),
+  db = require('./config/db'),
   space = require('./models/space'),
   User = require("./models/users"),
 
@@ -14,6 +14,7 @@ var express = require('express'),
   spaces = require('./routes/spaces'),
   home = require('./routes/home'),
   auth = require('./routes/auth'),
+  bookings = require('./routes/bookings'),
   http = require('http');
 
 var passport = require("passport"),

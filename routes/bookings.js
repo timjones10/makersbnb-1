@@ -22,7 +22,7 @@ router.get('/', function(req, res){
 /*
  * POST /spaces rout to create a new post.
  */
-router.post('/:name', function(req, res){
+router.post('/', function(req, res){
     var id = req.query.spaceId;
 
     Space.findOne({_id: id}, function(err, space){
