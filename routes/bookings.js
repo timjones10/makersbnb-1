@@ -1,33 +1,50 @@
 var express = require('express');
-var Space = require('../models/bookedDates');
+var Space = require('../models/space');
+var Booking = require('../models/booking');
 var router = express.Router();
+var mongoose = require('mongoose');
 
 /*
  * GET /spaces route to retrieve all the spaces.
  */
-
 router.get('/', function(req, res){
-    Space.find({}, function(err, spaces){
-        if(err) return console.log(err);
-        res.render('bookings/new', { spaces: spaces });
-    })
-});
-
-router.get('/addspace', function(req, res){
-    res.render('spaces/addspace');
-});
-
-router.post('/', function(req, res){
-    var title = req.body.title;
-    var description = req.body.description;
-    var price = req.body.price;
-    Space.create({ title: title, description: description,
-        price: price
-    }, function(err, space){
-        if(err) return console.log(err);
-        res.redirect('/spaces');
+    var id = req.query.spaceId;
+    console.log(id)
+    Space.findOne({ _id: id })
+        .populate('bookings')
+        .exec(function (err, space) {
+            if(err) return console.log(err);
+            // console.log('The object is %s', space);
+            res.render('bookings/new', { space: space });
     });
 });
 
-//export all the functions
+/*
+ * POST /spaces rout to create a new post.
+ */
+router.post('/:name', function(req, res){
+    var id = req.query.spaceId;
+
+    Space.findOne({_id: id}, function(err, space){
+        if(err) return console.log(err);
+
+        var booking = new Booking({
+            _id: new mongoose.Types.ObjectId(),
+            date: req.body.date,
+            space: space._id
+        });
+
+        booking.save(function (err) {
+            if(err) return console.log(err);
+            //then add story to person
+            space.bookings.push(booking);
+            space.save(function (err) {
+                if (err) throw err;
+                res.redirect('/spaces');
+            });
+        });
+
+    });
+});
+
 module.exports = router;

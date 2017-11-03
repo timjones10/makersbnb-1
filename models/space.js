@@ -4,7 +4,7 @@ var spaceSchema = new mongoose.Schema({
     title       : { type: String},
     description : { type: String},
     price       : { type: Number},
-    bookedDates : [{ type: mongoose.Schema.Types.ObjectId, ref: 'BookedDate' }]
+    bookings : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Booking' }]
 });
 
 var Space = mongoose.model('Space', spaceSchema);

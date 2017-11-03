@@ -1,17 +1,11 @@
-var morgan = require('morgan');
-bodyParser = require('body-parser');
+// var bodyParser = require('body-parser');
+var Browser = require('zombie');
 var assert = require('assert');
-
-
 
 describe('Spaces', function(){
 
-  before(function() {
-
-  });
-
-  // load the contact page
   before(function(done) {
+    this.browser = new Browser({ site: 'http://localhost:3000' });
     this.browser.visit('/spaces', done);
   });
 
