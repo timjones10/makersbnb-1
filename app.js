@@ -13,8 +13,7 @@ var express = require('express'),
   users = require('./routes/users'),
   spaces = require('./routes/spaces'),
   home = require('./routes/home'),
-  register = require('./routes/register'),
-  login = require('./routes/login')
+  auth = require('./routes/auth'),
   http = require('http');
 
 var passport = require("passport"),
@@ -23,9 +22,9 @@ var passport = require("passport"),
 
 var app = express();
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/auth_demo_app", {
-  useMongoClient: true
-});
+// mongoose.connect("mongodb://localhost/auth_demo_app", {
+//   useMongoClient: true
+// });
   mongoose.Promise = global.Promise;
 
 app.use(require("express-session")({
@@ -56,8 +55,8 @@ app.use('/', index);
 app.use('/spaces', spaces);
 app.use('/users', users);
 app.use('/secret', home);
-app.use('/register', register);
-app.use('/login', login);
+app.use('/auth', auth);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
