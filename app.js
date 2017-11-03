@@ -4,6 +4,8 @@ var express = require('express'),
   logger = require('morgan'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
+  engine = require('ejs-layout'),
+
 
   db = require('./config/db'),
   space = require('./models/space'),
@@ -42,6 +44,7 @@ app.use(passport.session());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.engine('ejs', engine.__express);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
