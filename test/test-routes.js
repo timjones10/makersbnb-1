@@ -6,12 +6,14 @@ var assert = require('assert');
 var http = require('http');
 
 
-describe('Spaces', function(){
+describe('Spaces', function() {
 
   before(function() {
     this.server = http.createServer(app).listen(3000);
     // initialize the browser using the same port as the test application
-    this.browser = new Browser({ site: 'http://localhost:3000' });
+    this.browser = new Browser({
+      site: 'http://localhost:3000'
+    });
   });
 
   // load the contact page
@@ -27,9 +29,6 @@ describe('Spaces', function(){
 
   });
 
-  describe('Post', function() {
-//this is left over from a test which was removed
-  });
 
   describe('Post', function() {
 
@@ -50,7 +49,21 @@ describe('Spaces', function(){
       assert(this.browser.text('li'), 'Test Title Zombie');
     });
   });
-})
+  describe('Home page', function() {
+
+    before(function(done) {
+      this.browser.visit('/', done);
+    });
+
+    it('should display the index page', function() {
+      assert.ok(this.browser.success);
+    });
+
+    it('has an anchor with text Sign up here !', function() {
+      assert(this.browser.text('a'), 'Sign up here !');
+    });
+  }); // describe
+}); //global describe
 
 
 
